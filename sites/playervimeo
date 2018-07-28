@@ -1,7 +1,7 @@
 proxy_cache_path /usr/local/nginx/content/cache/youtube levels=1:2 keys_zone=youtube:10m max_size=1g inactive=7d use_temp_path=off;
 
 server {
-	listen	8700;
+	listen	8800;
 	include spider.conf;
 	
 	#location /watch {
@@ -9,9 +9,9 @@ server {
 	#}
 
 	location / {
-		proxy_pass https://vimeo.com;
-		proxy_set_header Host vimeo.com;
-		proxy_set_header Referer https://vimeo.com;
+		proxy_pass https://player.vimeo.com;
+		proxy_set_header Host player.vimeo.com;
+		proxy_set_header Referer https://player.vimeo.com;
 		proxy_redirect off;
 
 		proxy_buffer_size	64k;
@@ -25,7 +25,7 @@ server {
 
 		sub_filter_once off;
 		sub_filter_types text text/css text/javascript application/json;
-		sub_filter vimeo.com local_server_ip:8700;
+		sub_filter player.vimeo.com local_server_ip:8800;
 
 		proxy_cache youtube;
 		proxy_cache_valid  200 7d;
@@ -34,7 +34,7 @@ server {
 		sub_filter /watch?v= http://local_server_ip:9999/watch?v=;
 
 		# fail
-		sub_filter www.google.com local_server_ip:8700;
+		sub_filter www.google.com local_server_ip:8800;
 		sub_filter https http;
 		sub_filter base.js noexist.js;
 		#sub_filter network.js noexist.js;
