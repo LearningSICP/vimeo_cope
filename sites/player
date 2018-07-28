@@ -2,7 +2,7 @@ proxy_cache_path /usr/local/nginx/content/cache/vimeo levels=1:2 keys_zone=vimeo
 
 server {
 	listen	8700;
-	server_name learningsicp.org;
+	server_name player.learningsicp.org;
 	include spider.conf;
 	
 	#location /watch {
