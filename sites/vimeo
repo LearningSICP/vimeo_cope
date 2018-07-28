@@ -9,9 +9,9 @@ server {
 	#}
 
 	location / {
-		proxy_pass https://vimeo.com;
-		proxy_set_header Host vimeo.com;
-		proxy_set_header Referer https://vimeo.com;
+		proxy_pass https://player.vimeo.com;
+		proxy_set_header Host player.vimeo.com;
+		proxy_set_header Referer https://player.vimeo.com;
 		proxy_redirect off;
 
 		proxy_buffer_size	64k;
@@ -25,7 +25,7 @@ server {
 
 		sub_filter_once off;
 		sub_filter_types text text/css text/javascript application/json;
-		sub_filter vimeo.com local_server_ip:8700;
+		sub_filter player.vimeo.com local_server_ip:8700;
 
 		proxy_cache youtube;
 		proxy_cache_valid  200 7d;
